@@ -1,3 +1,4 @@
+// AssistFunctions.swift（修正済み v2）
 import SwiftUI
 
 extension Board {
