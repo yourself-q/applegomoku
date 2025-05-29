@@ -1,4 +1,4 @@
-// Board.swift（修正済み）
+// Board.swift（修正済み v2）
 import SwiftUI
 import Combine
 
@@ -9,10 +9,6 @@ struct Stone {
 
         var opposite: Color {
             self == .black ? .white : .black
-        }
-
-        var assistColor: Color {
-            self == .black ? .blue : .red
         }
     }
 
@@ -26,15 +22,15 @@ struct AssistInfo {
 
 class Board: ObservableObject {
     static let size = 15
-    @Published var stones: [[Stone?]] = Array(repeating: Array(repeating: nil, count: size), count: size)
-    @Published var assistInfo: [[AssistInfo?]] = Array(repeating: Array(repeating: nil, count: size), count: size)
+    @Published var stones: [[Stone?]] = Array(repeating: Array(repeating: nil, count: Board.size), count: Board.size)
+    @Published var assistInfo: [[AssistInfo?]] = Array(repeating: Array(repeating: nil, count: Board.size), count: Board.size)
     @Published var gameStatus: String = "Game in progress"
 
-    var currentPlayer: Stone.Color = .black // 修正: private -> var
+    var currentPlayer: Stone.Color = .black
 
     func reset() {
-        stones = Array(repeating: Array(repeating: nil, count: size), count: size)
-        assistInfo = Array(repeating: Array(repeating: nil, count: size), count: size)
+        stones = Array(repeating: Array(repeating: nil, count: Board.size), count: Board.size)
+        assistInfo = Array(repeating: Array(repeating: nil, count: Board.size), count: Board.size)
         gameStatus = "Game in progress"
         currentPlayer = .black
         analyzeBoard()
